@@ -1,0 +1,83 @@
+{
+  "kind": "collectionType",
+  "collectionName": "items",
+  "info": {
+    "singularName": "item",
+    "pluralName": "items",
+    "displayName": "Item"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "serial_number": {
+      "type": "string"
+    },
+    "item_status": {
+      "type": "enumeration",
+      "default": "active",
+      "enum": [
+        "active",
+        "maintenance",
+        "disposed",
+        "lost"
+      ]
+    },
+    "quantity": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    },
+    "unit": {
+      "type": "string",
+      "default": "pcs"
+    },
+    "purchase_date": {
+      "type": "date"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "items"
+    },
+    "location": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::location.location",
+      "inversedBy": "items"
+    },
+    "department": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::department.department",
+      "inversedBy": "items"
+    },
+    "supplier": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::supplier.supplier",
+      "inversedBy": "items"
+    },
+    "transactions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::transaction.transaction",
+      "mappedBy": "item"
+    },
+    "maintenance_logs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::maintenance-log.maintenance-log",
+      "mappedBy": "item"
+    }
+  }
+}

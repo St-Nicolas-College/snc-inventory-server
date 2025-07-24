@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "maintenance_logs",
+  "info": {
+    "singularName": "maintenance-log",
+    "pluralName": "maintenance-logs",
+    "displayName": "Maintenance Log"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "issue": {
+      "type": "text",
+      "required": true
+    },
+    "log_status": {
+      "type": "enumeration",
+      "default": "pending",
+      "enum": [
+        "pending",
+        "resolved"
+      ]
+    },
+    "date_reported": {
+      "type": "date"
+    },
+    "date_fixed": {
+      "type": "date"
+    },
+    "item": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::item.item",
+      "inversedBy": "maintenance_logs"
+    },
+    "reported_by": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "maintenance_logs"
+    }
+  }
+}
