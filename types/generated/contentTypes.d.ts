@@ -1073,7 +1073,9 @@ export interface PluginUsersPermissionsUser
     draftAndPublish: false;
   };
   attributes: {
-    account_type: Schema.Attribute.Enumeration<['admin', 'staff']> &
+    account_type: Schema.Attribute.Enumeration<
+      ['admin', 'staff', 'custodian']
+    > &
       Schema.Attribute.DefaultTo<'staff'>;
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;

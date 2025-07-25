@@ -71,7 +71,8 @@
       "default": "staff",
       "enum": [
         "admin",
-        "staff"
+        "staff",
+        "custodian"
       ]
     },
     "last_name": {
