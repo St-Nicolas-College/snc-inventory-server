@@ -433,6 +433,49 @@ export interface ApiDepartmentDepartment extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiItemTagItemTag extends Struct.CollectionTypeSchema {
+  collectionName: 'item_tags';
+  info: {
+    displayName: 'ItemTag';
+    pluralName: 'item-tags';
+    singularName: 'item-tag';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    assigned_date: Schema.Attribute.Date;
+    assigned_to: Schema.Attribute.String;
+    condition: Schema.Attribute.Enumeration<
+      ['new', 'good', 'fair', 'poor', 'damage']
+    > &
+      Schema.Attribute.DefaultTo<'good'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    item: Schema.Attribute.Relation<'manyToOne', 'api::item.item'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::item-tag.item-tag'
+    > &
+      Schema.Attribute.Private;
+    location: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    remarks: Schema.Attribute.String;
+    tag_number: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    tag_status: Schema.Attribute.Enumeration<
+      ['available', 'assigned', 'disposed']
+    > &
+      Schema.Attribute.DefaultTo<'available'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiItemItem extends Struct.CollectionTypeSchema {
   collectionName: 'items';
   info: {
@@ -473,6 +516,7 @@ export interface ApiItemItem extends Struct.CollectionTypeSchema {
       Schema.Attribute.DefaultTo<0>;
     serial_number: Schema.Attribute.String;
     supplier: Schema.Attribute.Relation<'manyToOne', 'api::supplier.supplier'>;
+    tags: Schema.Attribute.Relation<'oneToMany', 'api::item-tag.item-tag'>;
     transactions: Schema.Attribute.Relation<
       'oneToMany',
       'api::transaction.transaction'
@@ -1143,6 +1187,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::category.category': ApiCategoryCategory;
       'api::department.department': ApiDepartmentDepartment;
+      'api::item-tag.item-tag': ApiItemTagItemTag;
       'api::item.item': ApiItemItem;
       'api::location.location': ApiLocationLocation;
       'api::maintenance-log.maintenance-log': ApiMaintenanceLogMaintenanceLog;

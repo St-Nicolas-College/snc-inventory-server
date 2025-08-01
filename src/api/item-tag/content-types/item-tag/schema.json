@@ -1,0 +1,58 @@
+{
+  "kind": "collectionType",
+  "collectionName": "item_tags",
+  "info": {
+    "singularName": "item-tag",
+    "pluralName": "item-tags",
+    "displayName": "ItemTag"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tag_number": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "tag_status": {
+      "type": "enumeration",
+      "default": "available",
+      "enum": [
+        "available",
+        "assigned",
+        "disposed"
+      ]
+    },
+    "assigned_to": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "assigned_date": {
+      "type": "date"
+    },
+    "remarks": {
+      "type": "string"
+    },
+    "condition": {
+      "type": "enumeration",
+      "default": "good",
+      "enum": [
+        "new",
+        "good",
+        "fair",
+        "poor",
+        "damage"
+      ]
+    },
+    "item": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::item.item",
+      "inversedBy": "tags"
+    }
+  }
+}

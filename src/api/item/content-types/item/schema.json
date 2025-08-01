@@ -78,6 +78,12 @@
       "relation": "oneToMany",
       "target": "api::maintenance-log.maintenance-log",
       "mappedBy": "item"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::item-tag.item-tag",
+      "mappedBy": "item"
     }
   }
 }
