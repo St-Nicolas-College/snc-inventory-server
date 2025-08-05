@@ -22,7 +22,10 @@
       "enum": [
         "available",
         "assigned",
-        "disposed"
+        "disposed",
+        "in-repair",
+        "lost",
+        "returned"
       ]
     },
     "assigned_to": {
@@ -45,7 +48,7 @@
         "good",
         "fair",
         "poor",
-        "damage"
+        "damaged"
       ]
     },
     "item": {

@@ -447,7 +447,7 @@ export interface ApiItemTagItemTag extends Struct.CollectionTypeSchema {
     assigned_date: Schema.Attribute.Date;
     assigned_to: Schema.Attribute.String;
     condition: Schema.Attribute.Enumeration<
-      ['new', 'good', 'fair', 'poor', 'damage']
+      ['new', 'good', 'fair', 'poor', 'damaged']
     > &
       Schema.Attribute.DefaultTo<'good'>;
     createdAt: Schema.Attribute.DateTime;
@@ -467,7 +467,7 @@ export interface ApiItemTagItemTag extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     tag_status: Schema.Attribute.Enumeration<
-      ['available', 'assigned', 'disposed']
+      ['available', 'assigned', 'disposed', 'in-repair', 'lost', 'returned']
     > &
       Schema.Attribute.DefaultTo<'available'>;
     updatedAt: Schema.Attribute.DateTime;
