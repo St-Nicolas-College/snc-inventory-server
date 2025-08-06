@@ -373,6 +373,75 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAcquisitionAcquisition extends Struct.CollectionTypeSchema {
+  collectionName: 'acquisitions';
+  info: {
+    displayName: 'Acquisition';
+    pluralName: 'acquisitions';
+    singularName: 'acquisition';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    acquired_date: Schema.Attribute.Date;
+    borrower: Schema.Attribute.Relation<'manyToOne', 'api::borrower.borrower'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    item: Schema.Attribute.Relation<'manyToOne', 'api::item.item'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::acquisition.acquisition'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    quantity: Schema.Attribute.Integer;
+    remarks: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiBorrowerBorrower extends Struct.CollectionTypeSchema {
+  collectionName: 'borrowers';
+  info: {
+    displayName: 'Borrower';
+    pluralName: 'borrowers';
+    singularName: 'borrower';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    acquisitions: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::acquisition.acquisition'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    department: Schema.Attribute.String;
+    email: Schema.Attribute.Email;
+    id_numner: Schema.Attribute.String;
+    item_tags: Schema.Attribute.Relation<'oneToMany', 'api::item-tag.item-tag'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::borrower.borrower'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    role: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   collectionName: 'categories';
   info: {
@@ -445,7 +514,10 @@ export interface ApiItemTagItemTag extends Struct.CollectionTypeSchema {
   };
   attributes: {
     assigned_date: Schema.Attribute.Date;
-    assigned_to: Schema.Attribute.String;
+    assigned_to: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::borrower.borrower'
+    >;
     condition: Schema.Attribute.Enumeration<
       ['new', 'good', 'fair', 'poor', 'damaged']
     > &
@@ -487,6 +559,10 @@ export interface ApiItemItem extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
+    acquisitions: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::acquisition.acquisition'
+    >;
     category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1185,6 +1261,8 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::acquisition.acquisition': ApiAcquisitionAcquisition;
+      'api::borrower.borrower': ApiBorrowerBorrower;
       'api::category.category': ApiCategoryCategory;
       'api::department.department': ApiDepartmentDepartment;
       'api::item-tag.item-tag': ApiItemTagItemTag;

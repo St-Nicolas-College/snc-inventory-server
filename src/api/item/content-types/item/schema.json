@@ -84,6 +84,12 @@
       "relation": "oneToMany",
       "target": "api::item-tag.item-tag",
       "mappedBy": "item"
+    },
+    "acquisitions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::acquisition.acquisition",
+      "mappedBy": "item"
     }
   }
 }

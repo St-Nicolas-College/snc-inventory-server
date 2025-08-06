@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "acquisitions",
+  "info": {
+    "singularName": "acquisition",
+    "pluralName": "acquisitions",
+    "displayName": "Acquisition"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "item": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::item.item",
+      "inversedBy": "acquisitions"
+    },
+    "borrower": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::borrower.borrower",
+      "inversedBy": "acquisitions"
+    },
+    "quantity": {
+      "type": "integer"
+    },
+    "remarks": {
+      "type": "string"
+    },
+    "acquired_date": {
+      "type": "date"
+    }
+  }
+}

@@ -28,9 +28,6 @@
         "returned"
       ]
     },
-    "assigned_to": {
-      "type": "string"
-    },
     "location": {
       "type": "string"
     },
@@ -56,6 +53,12 @@
       "relation": "manyToOne",
       "target": "api::item.item",
       "inversedBy": "tags"
+    },
+    "assigned_to": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::borrower.borrower",
+      "inversedBy": "item_tags"
     }
   }
 }

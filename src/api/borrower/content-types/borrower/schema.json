@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "borrowers",
+  "info": {
+    "singularName": "borrower",
+    "pluralName": "borrowers",
+    "displayName": "Borrower"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "id_numner": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "role": {
+      "type": "string"
+    },
+    "department": {
+      "type": "string"
+    },
+    "item_tags": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::item-tag.item-tag",
+      "mappedBy": "assigned_to"
+    },
+    "acquisitions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::acquisition.acquisition",
+      "mappedBy": "borrower"
+    }
+  }
+}
