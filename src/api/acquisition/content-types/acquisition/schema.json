@@ -31,6 +31,12 @@
     },
     "acquired_date": {
       "type": "date"
+    },
+    "item_tag": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::item-tag.item-tag",
+      "inversedBy": "acquisition"
     }
   }
 }

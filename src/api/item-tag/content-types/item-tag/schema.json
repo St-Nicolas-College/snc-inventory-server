@@ -59,6 +59,12 @@
       "relation": "manyToOne",
       "target": "api::borrower.borrower",
       "inversedBy": "item_tags"
+    },
+    "acquisition": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::acquisition.acquisition",
+      "mappedBy": "item_tag"
     }
   }
 }

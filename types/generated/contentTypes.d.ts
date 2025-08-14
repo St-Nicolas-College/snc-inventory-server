@@ -390,6 +390,7 @@ export interface ApiAcquisitionAcquisition extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     item: Schema.Attribute.Relation<'manyToOne', 'api::item.item'>;
+    item_tag: Schema.Attribute.Relation<'oneToOne', 'api::item-tag.item-tag'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -513,6 +514,10 @@ export interface ApiItemTagItemTag extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
+    acquisition: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::acquisition.acquisition'
+    >;
     assigned_date: Schema.Attribute.Date;
     assigned_to: Schema.Attribute.Relation<
       'manyToOne',
