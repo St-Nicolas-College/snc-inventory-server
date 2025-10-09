@@ -95,6 +95,12 @@
       "relation": "oneToMany",
       "target": "api::maintenance-log.maintenance-log",
       "mappedBy": "reported_by"
+    },
+    "department": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::department.department",
+      "inversedBy": "user"
     }
   }
 }

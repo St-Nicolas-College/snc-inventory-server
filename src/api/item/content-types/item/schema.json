@@ -90,6 +90,9 @@
       "relation": "oneToMany",
       "target": "api::acquisition.acquisition",
       "mappedBy": "item"
+    },
+    "user_department": {
+      "type": "string"
     }
   }
 }
