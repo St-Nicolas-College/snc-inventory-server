@@ -1206,7 +1206,7 @@ export interface PluginUsersPermissionsUser
   };
   attributes: {
     account_type: Schema.Attribute.Enumeration<
-      ['admin', 'staff', 'custodian']
+      ['admin', 'staff', 'custodian', 'viewer']
     > &
       Schema.Attribute.DefaultTo<'staff'>;
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -1226,6 +1226,7 @@ export interface PluginUsersPermissionsUser
       }>;
     first_name: Schema.Attribute.String;
     last_name: Schema.Attribute.String;
+    lastLogin: Schema.Attribute.DateTime;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

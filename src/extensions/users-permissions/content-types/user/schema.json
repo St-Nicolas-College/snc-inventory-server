@@ -72,7 +72,8 @@
       "enum": [
         "admin",
         "staff",
-        "custodian"
+        "custodian",
+        "viewer"
       ]
     },
     "last_name": {
@@ -101,6 +102,9 @@
       "relation": "oneToOne",
       "target": "api::department.department",
       "inversedBy": "user"
+    },
+    "lastLogin": {
+      "type": "datetime"
     }
   }
 }
