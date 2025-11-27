@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "quantity_logs",
+  "info": {
+    "singularName": "quantity-log",
+    "pluralName": "quantity-logs",
+    "displayName": "Quantity Log"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "quantity_added": {
+      "type": "integer"
+    },
+    "previous_quantity": {
+      "type": "integer"
+    },
+    "new_quantity": {
+      "type": "integer"
+    },
+    "added_by": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "quantity_logs"
+    },
+    "added_at": {
+      "type": "datetime"
+    },
+    "item": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::item.item",
+      "inversedBy": "quantity_logs"
+    }
+  }
+}

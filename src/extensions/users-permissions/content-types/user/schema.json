@@ -105,6 +105,12 @@
     },
     "lastLogin": {
       "type": "datetime"
+    },
+    "quantity_logs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::quantity-log.quantity-log",
+      "mappedBy": "added_by"
     }
   }
 }

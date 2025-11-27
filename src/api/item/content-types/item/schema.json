@@ -93,6 +93,12 @@
     },
     "user_department": {
       "type": "string"
+    },
+    "quantity_logs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::quantity-log.quantity-log",
+      "mappedBy": "item"
     }
   }
 }

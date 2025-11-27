@@ -601,6 +601,10 @@ export interface ApiItemItem extends Struct.CollectionTypeSchema {
     quantity: Schema.Attribute.Integer &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<0>;
+    quantity_logs: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::quantity-log.quantity-log'
+    >;
     serial_number: Schema.Attribute.String;
     supplier: Schema.Attribute.Relation<'manyToOne', 'api::supplier.supplier'>;
     tags: Schema.Attribute.Relation<'oneToMany', 'api::item-tag.item-tag'>;
@@ -678,6 +682,42 @@ export interface ApiMaintenanceLogMaintenanceLog
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiQuantityLogQuantityLog extends Struct.CollectionTypeSchema {
+  collectionName: 'quantity_logs';
+  info: {
+    displayName: 'Quantity Log';
+    pluralName: 'quantity-logs';
+    singularName: 'quantity-log';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    added_at: Schema.Attribute.DateTime;
+    added_by: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    item: Schema.Attribute.Relation<'manyToOne', 'api::item.item'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::quantity-log.quantity-log'
+    > &
+      Schema.Attribute.Private;
+    new_quantity: Schema.Attribute.Integer;
+    previous_quantity: Schema.Attribute.Integer;
+    publishedAt: Schema.Attribute.DateTime;
+    quantity_added: Schema.Attribute.Integer;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1249,6 +1289,10 @@ export interface PluginUsersPermissionsUser
     position: Schema.Attribute.String;
     provider: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    quantity_logs: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::quantity-log.quantity-log'
+    >;
     resetPasswordToken: Schema.Attribute.String & Schema.Attribute.Private;
     role: Schema.Attribute.Relation<
       'manyToOne',
@@ -1288,6 +1332,7 @@ declare module '@strapi/strapi' {
       'api::item.item': ApiItemItem;
       'api::location.location': ApiLocationLocation;
       'api::maintenance-log.maintenance-log': ApiMaintenanceLogMaintenanceLog;
+      'api::quantity-log.quantity-log': ApiQuantityLogQuantityLog;
       'api::supplier.supplier': ApiSupplierSupplier;
       'api::transaction.transaction': ApiTransactionTransaction;
       'plugin::content-releases.release': PluginContentReleasesRelease;
